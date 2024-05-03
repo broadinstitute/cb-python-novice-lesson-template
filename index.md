@@ -67,7 +67,3 @@ recommend if possible.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### Getting Started
-
-To get started, follow the directions on the [Setup](learners/setup.md) page to download data
-and install a Python interpreter.
