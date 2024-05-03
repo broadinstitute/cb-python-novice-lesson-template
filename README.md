@@ -24,8 +24,8 @@ This lesson is also available in [R] and [MATLAB].
 
 ## Episodes
 
-| \#   | Episode | Time | Question(s)                                                                  |
-| --: | :------ | :--: | :--------------------------------------------------------------------------- |
+| \#   | Episode | Question(s)                                                                  |
+| --: | :------ | :--------------------------------------------------------------------------- |
 | 1   | [Python Fundamentals][episode01]        | What basic data types can I work with in Python?<br>How can I create a new variable in Python?<br>Can I change the value associated with a variable after I create it?                             |
 | 2   | [Analyzing Patient Data][episode02]        | How can I process tabular data files in Python?                              |
 | 3   | [Visualizing Tabular Data][episode03]        | How can I visualize tabular data in Python?<br>How can I group several plots together?                                  |
