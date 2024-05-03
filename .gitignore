@@ -53,3 +53,8 @@ vendor/
 .docker-vendor/
 Gemfile.lock
 .*history
+
+# VScode workspace 
+*.code-workspace
+.metals
+.vscode
