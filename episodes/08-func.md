@@ -22,6 +22,23 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::::::  spoiler
+
+## Session setup
+
+If did not continue in the same notebook directly from the last time you accessed Google Drive, you need the following lines:
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+file_path = '/content/drive/MyDrive/swc-python/data/'
+
+import numpy
+import matplotlib.pyplot as plt
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 At this point, we've seen that code can have Python make decisions about what it sees in our data. What if we want to convert some of our data, like taking a temperature in Fahrenheit and converting it to Celsius. We could write something like this for converting a single number
 
 ```python
@@ -196,6 +213,22 @@ temperature in Fahrenheit was: 212.0
 temperature in Kelvin was: 373.15
 ```
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+## You know what I mean - right?
+
+If you're confused by the idea of variable scope, here's an analogy. Imagine that your friend sends you a message saying "I'm going on vacation. Meet me in the state capital!" You're in Massachusetts, so you go to Boston and call your friend to let them know where you are. 
+
+Your friend is confused and says "What do you mean? I'm in Sacramento!"
+
+The expression "state capital" is like a local variable. It can refer to many different cities depending on the context. To someone in Massachusetts, it means "Boston." To someone in California, it means "Sacramento."
+
+What if you have another friend who lives in Canada? Canada has provinces, not states. There is no such place that "the state capital" could possibly mean to your Canadian friend.
+
+Variable scope in Python is a little bit like this. A local variable is defined within a specific context, such as a function. Outside this context, the same variable name might mean something different, or it might mean nothing at all. Pay careful attention when you use local variables!
+
+Global variables are like saying "Meet me in Boston, Massachusetts, USA." Once you define them, you can use them in any function you want and they will mean the same thing.
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Tidying up
 
 Now that we know how to wrap bits of code up in functions,
@@ -207,7 +240,7 @@ def visualize(filename):
 
     data = numpy.loadtxt(fname=filename, delimiter=',')
 
-    fig = matplotlib.pyplot.figure(figsize=(10.0, 3.0))
+    fig = plt.figure(figsize=(10.0, 3.0))
 
     axes1 = fig.add_subplot(1, 3, 1)
     axes2 = fig.add_subplot(1, 3, 2)
@@ -223,7 +256,7 @@ def visualize(filename):
     axes3.plot(numpy.amin(data, axis=0))
 
     fig.tight_layout()
-    matplotlib.pyplot.show()
+    plt.show()
 ```
 
 and another function called `detect_problems` that checks for those systematics
@@ -252,7 +285,8 @@ we can now read and reuse both ideas separately.
 We can reproduce the previous analysis with a much simpler `for` loop:
 
 ```python
-filenames = sorted(glob.glob('inflammation*.csv'))
+import glob
+filenames = sorted(glob.glob(file_path + 'inflammation*.csv'))
 
 for filename in filenames[:3]:
     print(filename)
@@ -299,7 +333,7 @@ That looks right,
 so let's try `offset_mean` on our real data:
 
 ```python
-data = numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
+data = numpy.loadtxt(fname=file_path+'inflammation-01.csv', delimiter=',')
 print(offset_mean(data, 0))
 ```
 
@@ -440,7 +474,7 @@ In fact,
 we can pass the filename to `loadtxt` without the `fname=`:
 
 ```python
-numpy.loadtxt('inflammation-01.csv', delimiter=',')
+numpy.loadtxt(file_path+'inflammation-01.csv', delimiter=',')
 ```
 
 ```output
@@ -456,7 +490,7 @@ array([[ 0.,  0.,  1., ...,  3.,  0.,  0.],
 but we still need to say `delimiter=`:
 
 ```python
-numpy.loadtxt('inflammation-01.csv', ',')
+numpy.loadtxt(file_path+'inflammation-01.csv', ',')
 ```
 
 ```error
@@ -604,7 +638,7 @@ and eight others that do.
 If we call the function like this:
 
 ```python
-numpy.loadtxt('inflammation-01.csv', ',')
+numpy.loadtxt(file_path+'inflammation-01.csv', ',')
 ```
 
 then the filename is assigned to `fname` (which is what we want),
@@ -963,7 +997,12 @@ could be further improved to make them more readable.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::  spoiler
 
+## Congratulations
+
+You've used now Numpy (critical for working with datasets), Matplotlib (a great way to visualize data) and seen fundamental computing concepts like lists, loops, conditionals and functions. With this solid foundation, you're ready to move on to apply all of these new skills to carrying out more sophisticated bioinformatics analysis work. Don't worry if everything doesn't feel perfectly comfortable yet. We're going to have many more opportunities for practice as we move forward on our bioinformatics journey!
+:::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 

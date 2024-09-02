@@ -26,6 +26,27 @@ specialized tools built up from these basic units live in
 [libraries](../learners/reference.md#library)
 that can be called upon when needed.
 
+## Accessing data in Google Drive
+
+To access the data you've uploaded to Google Drive for this workshop, you'll need to load a library developed by Google for this purpose.
+
+```python
+from google.colab import drive
+```
+
+Once the library has been loaded, you can make your Google Drive data accessible by using a command called mount:
+
+```python
+drive.mount('/content/drive').       # You will need to grant Google several access permissions
+```
+
+If you leave your colab notebook or let it idle for too long, you will need to rerun the above commands to make your Google Drive accessible again.
+
+Save a variable with the directory where you've pre-staged the data for this workshop:
+```python
+file_path = '/content/drive/MyDrive/swc-python/data/'
+```
+
 ## Loading data into Python
 
 To begin processing the clinical trial inflammation data, we need to load it into Python.
@@ -48,7 +69,7 @@ need for each program.
 Once we've imported the library, we can ask the library to read our data file for us:
 
 ```python
-numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
+numpy.loadtxt(fname=file_path + 'inflammation-01.csv', delimiter=',')
 ```
 
 ```output
@@ -95,7 +116,7 @@ value to a variable, we can also assign an array of values to a variable using t
 Let's re-run `numpy.loadtxt` and save the returned data:
 
 ```python
-data = numpy.loadtxt(fname='inflammation-01.csv', delimiter=',')
+data = numpy.loadtxt(fname=file_path + 'inflammation-01.csv', delimiter=',')
 ```
 
 This statement doesn't produce any output because we've assigned the output to the variable `data`.
@@ -587,9 +608,11 @@ array([], shape=(0, 40), dtype=float64)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::::::::::::  challenge
+If you're wondering what other operations you can perform with arrays, take a look at the following bonus challenge.
 
-## Stacking Arrays
+:::::::::::::::::::::::::::::::::::  spoiler
+
+## Bonus Challenge: Stacking Arrays
 
 Arrays can be concatenated and stacked on top of one another,
 using NumPy's `vstack` and `hstack` functions for vertical and horizontal stacking, respectively.
@@ -632,6 +655,8 @@ Write some additional code that slices the first and last columns of `A`,
 and stacks them into a 3x2 array.
 Make sure to `print` the results to verify your solution.
 
+  <!-- vertical spacer -->
+
 :::::::::::::::  solution
 
 ## Solution
@@ -658,6 +683,10 @@ D =
 
 :::::::::::::::::::::::::
 
+Alternative solution (most problems have more than one solution!):
+
+  <!-- vertical spacer -->
+
 :::::::::::::::  solution
 
 ## Solution
@@ -681,7 +710,7 @@ D =
 
 :::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 

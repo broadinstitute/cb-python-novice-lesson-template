@@ -17,6 +17,20 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::::::  spoiler
+
+## Episode Prerequisites
+
+If did not continue in the same notebook directly from the last time you accessed Google Drive, you need the following lines:
+
+```python
+from google.colab import drive
+drive.mount('/content/drive').      # You will need to grant Google several access permissions
+file_path = '/content/drive/MyDrive/swc-python/data/'
+```
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 As a final piece to processing our inflammation data, we need a way to get a list of all the files
 in our `data` directory whose names start with `inflammation-` and end with `.csv`.
 The following library will help us to achieve this:
@@ -30,16 +44,27 @@ that finds files and directories whose names match a pattern.
 We provide those patterns as strings:
 the character `*` matches zero or more characters,
 while `?` matches any one character.
+
+
 We can use this to get the names of all the CSV files in the current directory:
 
 ```python
-print(glob.glob('inflammation*.csv'))
+print(glob.glob(file_path + 'inflammation*.csv'))
 ```
 
 ```output
-['inflammation-05.csv', 'inflammation-11.csv', 'inflammation-12.csv', 'inflammation-08.csv',
-'inflammation-03.csv', 'inflammation-06.csv', 'inflammation-09.csv', 'inflammation-07.csv',
-'inflammation-10.csv', 'inflammation-02.csv', 'inflammation-04.csv', 'inflammation-01.csv']
+['/content/drive/MyDrive/swc-python/data/inflammation-07.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-10.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-11.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-03.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-09.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-06.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-12.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-02.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-08.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-01.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-05.csv',  
+'/content/drive/MyDrive/swc-python/data/inflammation-04.csv']
 ```
 
 As these examples show,
@@ -57,7 +82,7 @@ import glob
 import numpy
 import matplotlib.pyplot
 
-filenames = sorted(glob.glob('inflammation*.csv'))
+filenames = sorted(glob.glob(file_path + 'inflammation*.csv'))
 filenames = filenames[0:3]
 for filename in filenames:
     print(filename)
@@ -113,7 +138,7 @@ we see the following:
 
 ![](fig/inflammation-03-imshow.svg){alt='Heat map of the third inflammation dataset. Note that there are sporadic zero values throughoutthe entire dataset, and the last patient only has zero values over the 40 day study.'}
 
-We can see that there are zero values sporadically distributed across all patients and days of the
+We can see that there are zeroes sporadically distributed across all patients and days of the
 clinical trial, suggesting that there were potential issues with data collection throughout the
 trial. In addition, we can see that the last patient in the study didn't have any inflammation
 flare-ups at all throughout the trial, suggesting that they may not even suffer from arthritis!
@@ -135,7 +160,7 @@ import glob
 import numpy
 import matplotlib.pyplot
 
-filenames = sorted(glob.glob('inflammation*.csv'))
+filenames = sorted(glob.glob(file_path + 'inflammation*.csv'))
 
 data0 = numpy.loadtxt(fname=filenames[0], delimiter=',')
 data1 = numpy.loadtxt(fname=filenames[1], delimiter=',')
@@ -160,7 +185,7 @@ matplotlib.pyplot.show()
 Use each of the files once to generate a dataset containing values averaged over all patients by completing the code inside the loop given below:
 
 ```python
-filenames = glob.glob('inflammation*.csv')
+filenames = glob.glob(file_path + 'inflammation*.csv')
 composite_data = numpy.zeros((60, 40))
 for filename in filenames:
     # sum each new file's data into composite_data as it's read
@@ -180,7 +205,7 @@ import glob
 import numpy
 import matplotlib.pyplot
 
-filenames = glob.glob('inflammation*.csv')
+filenames = glob.glob(file_path + 'inflammation*.csv')
 composite_data = numpy.zeros((60, 40))
 
 for filename in filenames:
@@ -245,7 +270,7 @@ how to program.
 
 - Use `glob.glob(pattern)` to create a list of files whose names match a pattern.
 - Use `*` in a pattern to match zero or more characters, and `?` to match any single character.
-
+- Use a list of filenames and loops to analyze multiple  files.
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
